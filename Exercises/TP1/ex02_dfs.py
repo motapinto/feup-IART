@@ -14,36 +14,36 @@ if __name__ == '__main__':
         if state.boat == 1:
             if state.n_missionaries1 > 0 and (state.n_cannibals1 < state.n_missionaries1 or state.n_missionaries1 == 1)\
                     and state.n_cannibals2 <= state.n_missionaries2 + 1:
-                potential_states.append(state.transport(1, 0))
+                potential_states.insert(0, state.transport(1, 0))
             if state.n_missionaries1 > 1 and (state.n_cannibals1 <= state.n_missionaries1 - 2
                                               or state.n_missionaries1 == 2) \
                     and state.n_cannibals2 <= state.n_missionaries2 + 2:
-                potential_states.append(state.transport(2, 0))
+                potential_states.insert(0, state.transport(2, 0))
             if state.n_cannibals1 >= 1 and (state.n_cannibals2 + 1 <= state.n_missionaries2
                                             or state.n_missionaries2 == 0):
-                potential_states.append(state.transport(0, 1))
+                potential_states.insert(0, state.transport(0, 1))
             if state.n_cannibals1 >= 2 and (state.n_cannibals2 + 2 <= state.n_missionaries2
                                             or state.n_missionaries2 == 0):
-                potential_states.append(state.transport(0, 2))
+                potential_states.insert(0, state.transport(0, 2))
             if state.n_cannibals1 > 0 and state.n_missionaries1 > 0 and state.n_missionaries2 == state.n_cannibals2:
-                potential_states.append(state.transport(1, 1))
+                potential_states.insert(0, state.transport(1, 1))
 
         elif state.boat == 2:
             if state.n_missionaries2 > 0 and (state.n_cannibals2 < state.n_missionaries2 or state.n_missionaries2 == 1)\
                     and state.n_cannibals1 <= state.n_missionaries1 + 1:
-                potential_states.append(state.transport(1, 0))
+                potential_states.insert(0, state.transport(1, 0))
             if state.n_missionaries2 > 1 and (state.n_cannibals2 <= state.n_missionaries2 - 2 or
                                               state.n_missionaries2 == 2) \
                     and state.n_cannibals1 <= state.n_missionaries1 + 2:
-                potential_states.append(state.transport(2, 0))
+                potential_states.insert(0, state.transport(2, 0))
             if state.n_cannibals2 >= 1 and (state.n_cannibals1 + 1 <= state.n_missionaries1
                                             or state.n_missionaries1 == 0):
-                potential_states.append(state.transport(0, 1))
+                potential_states.insert(0, state.transport(0, 1))
             if state.n_cannibals2 >= 2 and (state.n_cannibals1 + 2 <= state.n_missionaries1
                                             or state.n_missionaries1 == 0):
-                potential_states.append(state.transport(0, 2))
+                potential_states.insert(0, state.transport(0, 2))
             if state.n_cannibals2 > 0 and state.n_missionaries2 > 0  and state.n_missionaries1 == state.n_cannibals1:
-                potential_states.append(state.transport(1, 1))
+                potential_states.insert(0, state.transport(1, 1))
 
         visited_states.append(state)
 
