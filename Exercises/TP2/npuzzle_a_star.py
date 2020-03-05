@@ -7,6 +7,7 @@ class State:
         self.nsize = nsize
         self.tsize = pow(self.nsize, 2)
         self.goal = list(range(0, self.tsize))
+        self.visited = []
 
     def print_puzzle(self, st):
         for (index, value) in enumerate(st):
@@ -17,13 +18,13 @@ class State:
         print()
 
     def move(self, puzzle, direction):
+        zero_position = puzzle.index(0)
+
         if direction == "UP":
-            zero_position = puzzle.index(0)
             puzzle[zero_position] = puzzle[zero_position - self.nsize]
             puzzle[zero_position - self.nsize] = 0
 
         elif direction == "DOWN":
-            zero_position = puzzle.index(0)
             puzzle[zero_position] = puzzle[zero_position + self.nsize]
             puzzle[zero_position + self.nsize] = 0
 
@@ -33,7 +34,6 @@ class State:
             puzzle[zero_position - 1] = 0
 
         elif direction == "RIGHT":
-            zero_position = puzzle.index(0)
             puzzle[zero_position] = puzzle[zero_position + 1]
             puzzle[zero_position + 1] = 0
 
@@ -42,14 +42,25 @@ class State:
     def possible_states(self, puzzle):
         potential_states = []
 
-        if puzzle.index(0) >= self.nsize:
-            potential_states.append(self.move(puzzle.copy(), "UP"))
-        if puzzle.index(0) < self.nsize*self.nsize - self.nsize:
-            potential_states.append(self.move(puzzle.copy(), "DOWN"))
-        if puzzle.index(0) % self.nsize != 0:
-            potential_states.append(self.move(puzzle.copy(), "LEFT"))
-        if puzzle.index(0) % self.nsize != self.nsize - 1:
-            potential_states.append(self.move(puzzle.copy(), "RIGHT"))
+        if puzzle.index(0) >= self.nsize and self.move(puzzle.copy(), "UP") not in self.visited:
+            up = self.move(puzzle.copy(), "UP")
+            potential_states.append(up)
+            self.visited.append(up)
+
+        if puzzle.index(0) < self.nsize*self.nsize - self.nsize and self.move(puzzle.copy(), "DOWN") not in self.visited:
+            down = self.move(puzzle.copy(), "DOWN")
+            potential_states.append(down)
+            self.visited.append(down)
+
+        if puzzle.index(0) % self.nsize != 0 and self.move(puzzle.copy(), "LEFT") not in self.visited:
+            left = self.move(puzzle.copy(), "LEFT")
+            potential_states.append(left)
+            self.visited.append(left)
+
+        if puzzle.index(0) % self.nsize != self.nsize - 1 and self.move(puzzle.copy(), "RIGHT") not in self.visited:
+            right = self.move(puzzle.copy(), "RIGHT")
+            potential_states.append(right)
+            self.visited.append(right)
 
         return potential_states
 
