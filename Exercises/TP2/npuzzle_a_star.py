@@ -18,24 +18,24 @@ class State:
 
     def move(self, puzzle, direction):
         if direction == "UP":
-            zero_postion = puzzle.index(0)
-            puzzle[puzzle.index(0)] = puzzle[puzzle.index(0) - self.nsize]
-            puzzle[zero_postion - self.nsize] = 0
+            zero_position = puzzle.index(0)
+            puzzle[zero_position] = puzzle[zero_position - self.nsize]
+            puzzle[zero_position - self.nsize] = 0
 
         elif direction == "DOWN":
-            zero_postion = puzzle.index(0)
-            puzzle[puzzle.index(0)] = puzzle[puzzle.index(0) + self.nsize]
-            puzzle[zero_postion - self.nsize] = 0
+            zero_position = puzzle.index(0)
+            puzzle[zero_position] = puzzle[zero_position + self.nsize]
+            puzzle[zero_position + self.nsize] = 0
 
         elif direction == "LEFT":
-            zero_postion = puzzle.index(0)
-            puzzle[puzzle.index(0)] = puzzle[puzzle.index(0) - 1]
-            puzzle[zero_postion - self.nsize] = 0
+            zero_position = puzzle.index(0)
+            puzzle[zero_position] = puzzle[zero_position - 1]
+            puzzle[zero_position - 1] = 0
 
         elif direction == "RIGHT":
-            zero_postion = puzzle.index(0)
-            puzzle[puzzle.index(0)] = puzzle[puzzle.index(0) + 1]
-            puzzle[zero_postion - self.nsize] = 0
+            zero_position = puzzle.index(0)
+            puzzle[zero_position] = puzzle[zero_position + 1]
+            puzzle[zero_position + 1] = 0
 
         return puzzle
 
@@ -70,7 +70,7 @@ class State:
 
     """ Determines the next state to follow and uses Mahattan distances method as the huristics. """
     def heuristic_next_state(self, puzzle):
-        potential_states = self.possible_states(puzzle)
+        potential_states = self.possible_states(puzzle.copy())
         manhattan_dist_values = []
 
         for state in potential_states:
@@ -87,12 +87,12 @@ class State:
         else:
             for state in potential_states:
                 if self.manhattan_distance(state) == shortest_path:
-                    return puzzle
+                    return state
 
     """ Determines best next state based on heuristic until it has reached the goal"""
     def solve(self, puzzle):
         while not puzzle == self.goal:
-            puzzle = self.heuristic_next_state(puzzle)
+            puzzle = self.heuristic_next_state(puzzle.copy())
             self.print_puzzle(puzzle)
 
 if __name__ == '__main__':
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     st = State(3)
 
     print('The Starting State is:')
-    start = [1,0,2,3,4,5,6,7,8]
+    start = [5, 0, 2, 1, 4, 3, 6, 7, 8]
     st.print_puzzle(start)
 
     print('The Goal State should be:')
