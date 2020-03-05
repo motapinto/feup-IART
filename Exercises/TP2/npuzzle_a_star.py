@@ -1,4 +1,6 @@
 import random
+import time
+
 class State:
     def __init__(self, nsize):
         # size: N-Puzzle size
@@ -64,7 +66,16 @@ class State:
 
         return potential_states
 
-    """ Calculate the Manhattan Distances of the particular State. """
+    """ Calculate the number of misplaced pieces of a puzzle. """
+    def misplaced_pieces(self, puzzle):
+        misplaced = 0
+        for value in puzzle:
+            if value is not puzzle.index(value):
+                misplaced += 1
+
+        return misplaced
+
+    """ Calculate the Manhattan Distances of a puzzle. """
     def manhattan_distance(self, puzzle):
         manhattan_dist = 0
 
@@ -79,32 +90,54 @@ class State:
 
         return manhattan_dist
 
-    """ Determines the next state to follow and uses Mahattan distances method as the huristics. """
-    def heuristic_next_state(self, puzzle):
-        potential_states = self.possible_states(puzzle.copy())
-        manhattan_dist_values = []
+    """ Determines the next state to follow and uses Mahattan distances method as the heuristics. """
+    def heuristic_next_state(self, puzzle, heuristic_type):
+        if heuristic_type == 1:
+            potential_states = self.possible_states(puzzle.copy())
+            manhattan_dist_values = []
 
-        for state in potential_states:
-            manhattan_dist_values.append(self.manhattan_distance(state))
-
-        shortest_path = min(manhattan_dist_values)
-
-       # If more than one path have same manhattan distance, then a random choice of one of them is analyzed and carried forward """
-        if manhattan_dist_values.count(shortest_path) > 1:
-            min_paths = [state for state in potential_states if self.manhattan_distance(state) == shortest_path]
-            return random.choice(min_paths)
-
-        # Chooses the state with that has the minimum manhattan distance
-        else:
             for state in potential_states:
-                if self.manhattan_distance(state) == shortest_path:
-                    return state
+                manhattan_dist_values.append(self.manhattan_distance(state))
+
+            shortest_path = min(manhattan_dist_values)
+
+           # If more than one path have same manhattan distance, then a random choice of one of them is analyzed and carried forward """
+            if manhattan_dist_values.count(shortest_path) > 1:
+                min_paths = [state for state in potential_states if self.manhattan_distance(state) == shortest_path]
+                return random.choice(min_paths)
+
+            # Chooses the state with that has the minimum manhattan distance
+            else:
+                for state in potential_states:
+                    if self.manhattan_distance(state) == shortest_path:
+                        return state
+
+        elif heuristic_type == 2:
+            potential_states = self.possible_states(puzzle.copy())
+            misplaced = []
+
+            for state in potential_states:
+                misplaced.append(self.misplaced_pieces(state))
+
+            shortest_path = min(misplaced)
+
+            # If more than one path have same number of misplaced pieces, then a random choice of one of them is analyzed and carried forward """
+            if misplaced.count(shortest_path) > 1:
+                min_paths = [state for state in potential_states if self.misplaced(state) == shortest_path]
+                return random.choice(min_paths)
+
+            # Chooses the state with that has the minimum manhattan distance
+            else:
+                for state in potential_states:
+                    if self.misplaced_pieces(state) == shortest_path:
+                        return state
 
     """ Determines best next state based on heuristic until it has reached the goal"""
-    def solve(self, puzzle):
+    def solve(self, puzzle, heuristic_type):
         while not puzzle == self.goal:
-            puzzle = self.heuristic_next_state(puzzle.copy())
+            puzzle = self.heuristic_next_state(puzzle.copy(), heuristic_type)
             self.print_puzzle(puzzle)
+
 
 if __name__ == '__main__':
     print('N-Puzzle Solver!')
@@ -118,6 +151,18 @@ if __name__ == '__main__':
     print('The Goal State should be:')
     st.print_puzzle(st.goal)
 
-    print('Here it Goes:')
+    print('Manhattan Distance:')
     st.print_puzzle(start)
-    st.solve(start)
+    start_time = time.time()
+    st.solve(start, 1)
+    end_time = time.time()
+    print("Time: ")
+    print(end_time - start_time)
+
+    print('Misplaced Pieces:')
+    st.print_puzzle(start)
+    start_time = time.time()
+    st.solve(start, 2)
+    end_time = time.time()
+    print("Time: ")
+    print(end_time - start_time)
