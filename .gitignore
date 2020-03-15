@@ -5,6 +5,6 @@ IART.iml
 # other
 aula1.txt
 Book.pdf
-*/__pycache__/
+__pycache__/
 *.pyc
 *.out
