@@ -1,5 +1,5 @@
-from Projects.P1.src.objects.Position import Position
-from Projects.P1.src.objects.Ride import Ride
+from src.objects.Position import Position
+from src.objects.Ride import Ride
 
 
 class Car(object):

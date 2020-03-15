@@ -1,7 +1,7 @@
 import sys
 
-from Projects.P1.src.files import parse_input, dump_rides
-from Projects.P1.src.objects.Car import Car
+from src.files import parse_input, dump_rides
+from src.objects.Car import Car
 
 
 def score_ride(car_to_score, ride_to_score, bonus_to_score):

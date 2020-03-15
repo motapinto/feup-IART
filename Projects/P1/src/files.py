@@ -1,4 +1,4 @@
-from Projects.P1.src.objects.Ride import Ride
+from src.objects.Ride import Ride
 
 
 def parse_input(file):
