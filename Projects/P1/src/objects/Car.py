@@ -12,9 +12,7 @@ class Car(object):
 
     def add_ride(self, ride: Ride, bonus) -> None:
         time = max(ride.earliest, self.current_t + self.position.distance(ride.start_position))
-
         ride.car = self
-
         score = 0
 
         if time == ride.earliest:

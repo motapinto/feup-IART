@@ -10,17 +10,6 @@ global_score = 0
 # all combined take 00:13:51
 
 
-def special_print(n):
-    number = str(n)
-    result = ""
-    for i in range(len(number), 0, -1):
-        if ((i + 1) % 4) == 0:
-            result += ","
-        result += number[i - 1]
-
-    return result[::-1]
-
-
 def run(filename):
     global global_score
     file = "../assets/input/" + filename
@@ -64,5 +53,5 @@ if __name__ == '__main__':
         run("d_metropolis")
         run("e_high_bonus")
 
-        print("\nGlobal score is {}".format(special_print(global_score)))
+        print("\nGlobal score is {}".format(global_score))
 
