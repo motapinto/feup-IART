@@ -17,9 +17,12 @@ def run(filename):
     cars = [Car(i + 1) for i in range(n_vehicles)]
 
     while len(rides) > 0:
+        # chooses the car with less current_t
         chosen_car = min(cars, key=lambda car_in_cars: car_in_cars.current_t)
+        # chooses the ride that gives the highest score
         chosen_ride = max(rides, key=lambda ride_in_rides: score_ride(chosen_car, ride_in_rides, bonus))
         chosen_car.add_ride(chosen_ride, bonus)
+        print(chosen_ride)
         rides.remove(chosen_ride)
 
     dump_rides(file + ".out", cars)
