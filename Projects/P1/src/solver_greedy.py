@@ -2,12 +2,14 @@ import sys
 from src.files import parse_input, dump_rides
 from src.objects.Car import Car
 
+# 1st file instant - 10
+# 2nd file instant - 176877
+# 3rd file takes 00:04:30 -
+# 4th file takes 00:04:46 -
+# 5th file takes 00:04:35 -
+# all combined take 00:13:51 -
+
 global_score = 0
-# 1st and 2nd files are almost instant
-# 3rd file takes 00:04:30
-# 4th file takes 00:04:46
-# 5th file takes 00:04:35
-# all combined take 00:13:51
 
 
 def run(filename):

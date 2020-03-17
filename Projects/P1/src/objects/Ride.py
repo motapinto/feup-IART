@@ -2,7 +2,7 @@ from src.objects.Position import Position
 
 
 class Ride(object):
-    def __init__(self, number, start_x, start_y, dest_x, dest_y, earliest, latest) -> None:
+    def __init__(self, number, start_x, start_y, dest_x, dest_y, earliest, latest):
         self.number = int(number)
         self.start_position = Position(start_x, start_y)
         self.destination_position = Position(dest_x, dest_y)

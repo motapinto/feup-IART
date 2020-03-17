@@ -3,13 +3,13 @@ from src.objects.Ride import Ride
 
 
 class Car(object):
-    def __init__(self, number) -> None:
+    def __init__(self, number):
         self.number = int(number)
         self.position = Position(0, 0)
         self.rides = []
         self.current_t = 0
 
-    def add_ride(self, ride: Ride, bonus) -> None:
+    def add_ride(self, ride: Ride, bonus):
         # time it takes the car to get to position
         time = max(ride.earliest, self.current_t + self.position.distance(ride.start_position))
         ride.car = self
