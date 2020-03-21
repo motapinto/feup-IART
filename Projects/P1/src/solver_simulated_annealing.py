@@ -1,5 +1,6 @@
 import sys
 import random
+import math
 from src.files import parse_input, dump_rides
 from src.objects.Car import Car
 
@@ -19,11 +20,12 @@ def run(filename):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     cars = [Car(i + 1) for i in range(n_vehicles)]
 
+    tk = len(rides)
     while len(rides) > 0:
-        chosen_car, chosen_ride = hill_climbing_random(cars, rides, bonus)
+        chosen_car, chosen_ride = simulated_annealing(cars, rides, bonus, tk)
         chosen_car.add_ride(chosen_ride, bonus)
-        print(chosen_ride)
         rides.remove(chosen_ride)
+        tk = random.uniform(0.3, 0.7) * tk
 
     dump_rides(file + ".out", cars)
 
@@ -36,21 +38,32 @@ def run(filename):
     print("Score for file {} -->\t\t{}".format(filename, score))
 
 
-def hill_climbing_random(cars, rides, bonus):
-    best_car = random.choice(cars)
-    best_ride = random.choice(rides)
-    max_score = score_ride(best_car, best_ride, bonus)
+def simulated_annealing(cars, rides, bonus, tk):
+    best_car = min(cars, key=lambda car_in_cars: car_in_cars.current_t)
+    best_ride = rides[0]
+    best_score = score_ride(best_car, best_ride, bonus)
 
-    while True:
+    Mk = (len(cars) * len(rides) * math.sqrt(tk))
+
+    for m in range(0, int(Mk)):
         next_car = random.choice(cars)
         next_ride = random.choice(rides)
         ride_score = score_ride(next_car, next_ride, bonus)
-        if ride_score > max_score:
-            max_score = ride_score
+
+        if next_car.position == best_car.position and next_car.current_t == best_car.current_t\
+                and next_ride is best_ride:
+            continue
+
+        if ride_score > best_score:
+            best_score = ride_score
             best_car = next_car
             best_ride = next_ride
-        else:
-            break
+
+        elif random.random() <= math.exp((ride_score - best_score)/tk):
+            print(math.exp((ride_score - best_score) / tk))
+            best_score = ride_score
+            best_car = next_car
+            best_ride = next_ride
 
     return best_car, best_ride
 
