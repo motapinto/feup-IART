@@ -22,7 +22,7 @@ def run(filename):
         # chooses the car with less current_t
         chosen_car = min(cars, key=lambda car_in_cars: car_in_cars.current_t)
         # chooses the ride that gives the highest score
-        chosen_ride = max(rides, key=lambda ride_in_rides: score_ride(chosen_car, ride_in_rides, bonus))
+        chosen_ride = hill_climbing_choose_ride(chosen_car, rides, bonus)
         chosen_car.add_ride(chosen_ride, bonus)
         print(chosen_ride)
         rides.remove(chosen_ride)
@@ -36,6 +36,19 @@ def run(filename):
 
     global_score += score
     print("Score for file {} -->\t\t{}".format(filename, score))
+
+
+def hill_climbing_choose_ride(car, rides, bonus):
+    best_ride = rides[0]
+    max_score = score_ride(car, rides[0], bonus)
+    for ride in rides:
+        ride_score = score_ride(car, ride, bonus)
+        if ride_score > max_score:
+            max_score = ride_score
+            best_ride = ride
+        else:
+            break
+    return best_ride
 
 
 def score_ride(car_to_score, ride_to_score, bonus_to_score):
