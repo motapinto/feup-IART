@@ -19,10 +19,10 @@ def run(filename):
     file = "../assets/input/" + filename
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     CarGenetic.BONUS = bonus
-    cars = []
 
+    cars = []
     for i in range(n_vehicles - 1):
-        population = [CarGenetic() for i in range(POPULATION_SIZE)]
+        population = [CarGenetic() for j in range(POPULATION_SIZE)]
         generation = 1
         max_fitness_car = population[0]
         fitness_pile = FIFO(CONSTANT_GENERATION_NUMBER)
@@ -50,10 +50,10 @@ def run(filename):
             population = new_population
             generation += 1
 
-            max_fitness_car.normalize()
-            cars.append(max_fitness_car)
-            for ride in max_fitness_car.rides:
-                rides.remove(ride)
+        max_fitness_car.normalize()
+        cars.append(max_fitness_car)
+        for ride in max_fitness_car.rides:
+            rides.remove(ride)
 
     last_car = CarGenetic(rides)
     last_car.normalize()
@@ -71,6 +71,7 @@ def run(filename):
 
     global_score += score
     print("Score for file {} -->\t\t{}".format(filename, score))
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

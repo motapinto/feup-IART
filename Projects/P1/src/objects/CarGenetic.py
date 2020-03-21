@@ -6,8 +6,6 @@ import random
 
 class CarGenetic(object):
     BONUS = 0
-    F = 0
-    N = 0
 
     def __init__(self, rides=[]):
         self.position = Position(0, 0)
