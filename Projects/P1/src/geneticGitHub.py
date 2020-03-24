@@ -50,7 +50,7 @@ class Car:
         self.pos = [0,0]
         self.t = 0
         self.fitness = 0
-        self.sort_rides
+        self.sort_rides()
         for ride in self.rides:
             self.t += abs(self.pos[0] - ride.a) + abs(self.pos[1] - ride.b)
             self.pos = [ride.a, ride.b]
@@ -161,7 +161,7 @@ def hash_code(file_name):
             Car.RIDES.remove(ride)
 
     last_car = Car(Car.RIDES)
-    last_car.normalize
+    last_car.normalize()
     cars.append(last_car)
 
     cars_to_file(cars, file_name)
