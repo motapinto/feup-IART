@@ -69,7 +69,6 @@ def run(filename):
     dump_rides(file + ".out", max_fitness_rides.cars)
 
     global_score += max_fitness_rides.fitness
-    print("Score for file {} -->\t\t{}".format(filename, max_fitness_rides.fitness))
 
 
 if __name__ == '__main__':
@@ -79,27 +78,27 @@ if __name__ == '__main__':
     else:
         start_time = time.time()
         run("a_example")
-        print("Finished a_example: time", time.time() - start_time, "with score", global_score)
+        print("Finished a_example: \t\ttime", time.time() - start_time, "with score", global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("b_should_be_easy")
-        print("Finished b_should_be_easy: time", time.time() - start_time, "with score",
+        print("Finished b_should_be_easy: \ttime", time.time() - start_time, "with score",
               global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("c_no_hurry")
-        print("Finished c_no_hurry: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished c_no_hurry: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("d_metropolis")
-        print("Finished d_metropolis: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished d_metropolis: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("e_high_bonus")
-        print("Finished e_high_bonus: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished e_high_bonus: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         print("\nGlobal score is {}".format(global_score))

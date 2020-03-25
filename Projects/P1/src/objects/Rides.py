@@ -1,4 +1,5 @@
 import random
+import math
 
 from src.objects.CarGeneticRides import CarGeneticRides
 
@@ -41,3 +42,38 @@ class Rides(object):
                 ride.car = random.randrange(Rides.N_CARS)
 
             self.cars[ride.car].add_ride(ride)
+
+    def hill_climbing_random(self):
+        population = []
+
+        for rideIndex in range(0, self.N_RIDES):
+            ride = random.choice(self.rides)
+            car = random.randrange(Rides.N_CARS)
+
+            swap = ride.car
+            ride.car = car
+
+            population.append(Rides(self.rides))
+
+            ride.car = swap
+
+        return max(population, key=lambda elem: elem.calculate_fitness())
+
+    def simulated_annealing(self, temperature):
+        fitness = self.fitness
+        Mk = (self.N_RIDES * math.sqrt(temperature + 1))
+
+        for m in range(0, int(Mk)):
+            ride = random.choice(self.rides)
+            car = random.randrange(Rides.N_CARS)
+
+            swap = ride.car
+            ride.car = car
+
+            if self.calculate_fitness() > fitness:
+                return
+
+            elif random.random() <= math.exp((self.fitness - fitness) / temperature):
+                return
+
+            self.fitness = fitness

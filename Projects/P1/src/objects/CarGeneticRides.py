@@ -7,7 +7,7 @@ import random
 class CarGeneticRides(object):
     BONUS = 0
 
-    def __init__(self, number=0):
+    def __init__(self, number):
         self.number = number
         self.position = Position(0, 0)
         self.current_t = 0

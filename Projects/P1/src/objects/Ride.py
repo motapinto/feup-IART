@@ -12,6 +12,9 @@ class Ride(object):
         self.car = None
         self.score = 0
 
+    def __hash__(self):
+        return self.number
+
     def __str__(self):
         return '[{}] from {} to {} via car {}'.format(self.number, self.start_position,
                                                       self.destination_position, self.car.number)

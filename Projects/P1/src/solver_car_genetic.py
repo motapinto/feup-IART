@@ -3,7 +3,7 @@ import random
 import time
 
 from src.files import parse_input, dump_rides
-from src.objects.CarGenetic import CarGenetic
+from src.objects.Car import Car
 from src.objects.FIFO import FIFO
 
 # Finished a_example: time 1.4856s with score 10
@@ -27,20 +27,23 @@ def run(filename):
     global global_score
     file = "../assets/input/" + filename
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
-    CarGenetic.BONUS = bonus
-    CarGenetic.RIDES = rides
-    CarGenetic.RIDES_PER_CAR = len(rides) // n_vehicles
+    Car.BONUS = bonus
+    Car.RIDES = rides
+    Car.RIDES_PER_CAR = len(rides) // n_vehicles
     cars = []
 
     for i in range(n_vehicles - 1):
-        population = [CarGenetic() for i in range(POPULATION_SIZE)]
+        population = [Car() for i in range(POPULATION_SIZE)]
         generation = 1
+
         max_fitness_car = population[0]
+        max_fitness_car.calculate_fitness()
+
         fitness_pile = FIFO(CONSTANT_GENERATION_NUMBER)
         fitness_pile.put(max_fitness_car.fitness)
 
-        print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" +
-               str(max_fitness_car.fitness)+")")
+        #print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" +
+        #       str(max_fitness_car.fitness)+")")
 
         while not fitness_pile.is_constant():
             for car in population:
@@ -50,6 +53,7 @@ def run(filename):
 
             if population[0].fitness > max_fitness_car.fitness:
                 max_fitness_car = population[0]
+
             fitness_pile.put(max_fitness_car.fitness)
 
             new_population = []
@@ -63,15 +67,15 @@ def run(filename):
 
             population = new_population
             generation += 1
-            print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" + str(
-                    max_fitness_car.fitness) + ")")
+            #print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" + str(
+            #        max_fitness_car.fitness) + ")")
 
         max_fitness_car.normalize()
         cars.append(max_fitness_car)
         for ride in max_fitness_car.rides:
-            CarGenetic.RIDES.remove(ride)
+            Car.RIDES.remove(ride)
 
-    last_car = CarGenetic(rides)
+    last_car = Car(rides)
     last_car.normalize()
     cars.append(last_car)
 
@@ -84,7 +88,6 @@ def run(filename):
             score += ride.score
 
     global_score += score
-    print("Score for file {} -->\t\t{}".format(filename, score))
 
 
 if __name__ == '__main__':
@@ -94,27 +97,27 @@ if __name__ == '__main__':
     else:
         start_time = time.time()
         run("a_example")
-        print("Finished a_example: time", time.time() - start_time, "with score", global_score)
+        print("Finished a_example: \t\ttime", time.time() - start_time, "with score", global_score)
 
         start_time = time.time()
         last_global_score = global_score
-        # run("b_should_be_easy")
-        # print("Finished b_should_be_easy: time", time.time() - start_time, "with score",
-        #       global_score - last_global_score)
+        run("b_should_be_easy")
+        print("Finished b_should_be_easy: \ttime", time.time() - start_time, "with score",
+              global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("c_no_hurry")
-        print("Finished c_no_hurry: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished c_no_hurry: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("d_metropolis")
-        print("Finished d_metropolis: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished d_metropolis: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         start_time = time.time()
         last_global_score = global_score
         run("e_high_bonus")
-        print("Finished e_high_bonus: time", time.time() - start_time, "with score", global_score - last_global_score)
+        print("Finished e_high_bonus: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
 
         print("\nGlobal score is {}".format(global_score))
