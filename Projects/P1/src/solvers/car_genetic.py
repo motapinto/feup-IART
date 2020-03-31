@@ -1,27 +1,37 @@
 import random
-from .files import parse_input, dump_rides, group
+from .files import parse_input, dump_rides
 from .objects.Car import Car
 from .objects.FIFO import FIFO
 
-# a_example           TIME 0.1681s                      SCORE 10
-# b_should_be_easy    TIME 59.7397s    (+- 1.0 min)     SCORE 176,877
-# c_no_hurry          TIME 6767.7762s  (+- 112.8 min)   SCORE 11,048,950
-# d_metropolis        TIME 2767.8569s  (+- 46.13 min)   SCORE 8,678,841
-# e_high_bonus        TIME 6332.6728s  (+- 105.5 min)   SCORE 21,243,463
-
-# global score is 41,148,141
-# total runtime is 15928.2139s (+- 265.5 min --> +- 04:25:29)
+# trial run
+# population = 500 | pooling_size = 200 | generations = 6 | mutation rate = 0.01
+# a_example            time 000.0215s	score 10
+# b_should_be_easy     time 004.5540s	score 176,877
+# c_no_hurry           time 587.2439s	score 9,550,340
+# d_metropolis         time 396.5267s	score 8,251,484
+# e_high_bonus         time 631.7614s	score 21,168,560
+# Global score is 39,147,271
+# Total runtime is 1620.1077s
 
 # final score
 global_score = 0
 
 # constants
-POPULATION_SIZE = 2000
-POOLING_SIZE = 0.001 * POPULATION_SIZE
-CONSTANT_GENERATION_NUMBER = 5
+POPULATION_SIZE = 500
+POOLING_SIZE = 0.4 * POPULATION_SIZE
+CONSTANT_GENERATION_NUMBER = 6
 MUTATION_RATE = 0.01
 
 
+def print_car_genetic_info():
+    print("\nCAR GENETIC")
+    print("{} {}".format("Population Size:".ljust(25, ' '), POPULATION_SIZE))
+    print("{} {}".format("Pooling Size:".ljust(25, ' '), int(POOLING_SIZE)))
+    print("{} {}".format("Mutation Rate:".ljust(25, ' '), MUTATION_RATE))
+    print("{} {}\n".format("Number of Generations:".ljust(25, ' '), CONSTANT_GENERATION_NUMBER))
+
+
+# toggle comment lines 51,52 and 76,77 to show or hide progression prints
 def car_genetic(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     Car.BONUS = bonus
@@ -39,8 +49,8 @@ def car_genetic(file):
         fitness_pile = FIFO(CONSTANT_GENERATION_NUMBER)
         fitness_pile.put(max_fitness_car.fitness)
 
-        # print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" +
-        #       str(max_fitness_car.fitness)+")")
+        # print("Car " + str(i+1) + " -- generation " + str(generation)
+        #       + " -- max fitness ("+str(max_fitness_car.fitness)+")")
 
         while not fitness_pile.is_constant():
             for car in population:
@@ -64,8 +74,8 @@ def car_genetic(file):
 
             population = new_population
             generation += 1
-            # print(filename + ": Car " + str(i + 1) + " -- generation " + str(generation) + " -- max fitness (" + str(
-            #        max_fitness_car.fitness) + ")")
+            # print("Car " + str(i+1) + " -- generation " + str(generation)
+            #       + " -- max fitness ("+str(max_fitness_car.fitness)+")")
 
         max_fitness_car.normalize()
         cars.append(max_fitness_car)

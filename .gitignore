@@ -1,6 +1,7 @@
 # general
 .idea
 *.iml
+gits
 
 # other
 Book.pdf

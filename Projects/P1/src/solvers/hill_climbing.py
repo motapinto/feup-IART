@@ -2,13 +2,14 @@ from .files import parse_input, dump_rides
 from .objects.Rides import Rides
 from .objects.CarGeneticRides import CarGeneticRides
 
-# a_example           TIME 0.0008s                    SCORE 4
-# b_should_be_easy    TIME 0.5055s                    SCORE 164,636
-# c_no_hurry          TIME 415.8198s  (+- 6.93 min)   SCORE 6,704,699
-# d_metropolis        TIME 592.1818s  (+- 17.2 min)   SCORE 4,189,112
-# e_high_bonus        TIME 1032.0356s (+- 32.5 min)   SCORE 15,706,741
-# global score is     26,765,192
-# total runtime is    1950.5438s (+- 32.5 min)
+# trial run
+# a_example            time 000.0014s	score 4
+# b_should_be_easy     time 000.8203s	score 167,601
+# c_no_hurry           time 534.0957s	score 6,673,587
+# d_metropolis         time 581.7603s	score 4,216,626
+# e_high_bonus         time 560.0255s	score 15,667,106
+# Global score is 26,724,924
+# Total runtime is 1676.7033s
 
 
 def hill_climbing(file):

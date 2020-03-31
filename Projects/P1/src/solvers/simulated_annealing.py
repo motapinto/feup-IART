@@ -3,13 +3,14 @@ from .files import parse_input, dump_rides
 from .objects.Rides import Rides
 from .objects.CarGeneticRides import CarGeneticRides
 
-# a_example           TIME 0.0019s     SCORE 4
-# b_should_be_easy    TIME 0.0534s     SCORE 162,600
-# c_no_hurry          TIME 2.1595s     SCORE 6,746,130
-# d_metropolis        TIME 2.4109s     SCORE 4,181,606
-# e_high_bonus        TIME 2.2745s     SCORE 15,681,615
-# global score is     26,771,955
-# total runtime is    6.9004s
+# trial run
+# a_example            time 000.0012s 	score 4
+# b_should_be_easy     time 000.0438s 	score 161,266
+# c_no_hurry           time 001.6680s 	score 6,744,998
+# d_metropolis         time 001.7412s 	score 4,138,429
+# e_high_bonus         time 001.9867s 	score 15,619,361
+# Global score is 26,664,058
+# Total runtime is 5.4411s
 
 
 def simulated_annealing(file):

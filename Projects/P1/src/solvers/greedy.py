@@ -1,13 +1,14 @@
 from .files import parse_input, dump_rides
 from .objects.CarGeneticRides import CarGeneticRides
 
-# a_example 			time 0.0010s with score 10
-# b_should_be_easy 	    time 0.2992s with score 176,877
-# c_no_hurry 			time 163.2715s with score 7,564,919
-# d_metropolis 		    time 174.3971s with score 4,689,009
-# e_high_bonus 		    time 179.0661s with score 21,465,945
-# Global score is  33,896,760
-# Total runtime is 517.0349s
+# trial run
+# a_example            time 0.0013s	    score 10
+# b_should_be_easy     time 0.1174s	    score 176,877
+# c_no_hurry           time 114.0726s	score 7,564,919
+# d_metropolis         time 109.4057s	score 4,689,009
+# e_high_bonus         time 109.5141s	score 21,465,945
+# Global score is 33,896,760
+# Total runtime is 333.1113s
 
 
 def greedy(file):

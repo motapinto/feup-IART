@@ -1,6 +1,5 @@
 from .Position import Position
 from .Ride import Ride
-
 import random
 
 
@@ -56,11 +55,11 @@ class Car(object):
         self.sort_rides()
         parent.sort_rides()
 
-        childs = []
+        children = []
         i = random.randint(0, self.RIDES_PER_CAR)
-        childs.append(Car(self.rides[0:i] + parent.rides[i:len(self.rides)]))
-        childs.append(Car(parent.rides[0:i] + self.rides[i:len(self.rides)]))
-        return childs
+        children.append(Car(self.rides[0:i] + parent.rides[i:len(self.rides)]))
+        children.append(Car(parent.rides[0:i] + self.rides[i:len(self.rides)]))
+        return children
 
     def mutate(self):
         for ride in self.rides:

@@ -9,15 +9,16 @@
 > **Any problems?**\
 > Start an Issue please.
 
-Open Pycharm on the google-hashcode-2018/src and run main.py
-Or on the command line run:
+Open Pycharm on the src/ inside this directory and run main.py
+You can also run the program through the command line:
 ```
 > python main.py <algorithm>
 > python main.py <algorithm> <file>
 
-Example:
+Examples:
 python main.py simulated_annealing
+python main.py hill_climbing b_should_be_easy
 ```
 
-algorithms: car_genetic | greedy | hill_climbing | rides_genetic | simulated_annealing
+algorithms: car_genetic | greedy | hill_climbing | rides_genetic | simulated_annealing\
 files:      a_example | b_should_be_easy | c_no_hurry | d_metropolis | e_high_bonus
