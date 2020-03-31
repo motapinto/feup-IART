@@ -1,6 +1,3 @@
-import sys
-import time
-
 from src.files import parse_input, dump_rides, group
 from src.objects.Rides import Rides
 from src.objects.CarGeneticRides import CarGeneticRides
@@ -16,9 +13,9 @@ from src.objects.CarGeneticRides import CarGeneticRides
 global_score = 0
 
 
-def run(filename):
+def hill_climbing(filename):
     global global_score
-    file = "../../assets/input/" + filename
+    file = "../assets/input/" + filename
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
 
     CarGeneticRides.BONUS = bonus
@@ -36,48 +33,3 @@ def run(filename):
     dump_rides(file + ".out", solution.cars)
     global_score += solution.fitness
 
-
-if __name__ == '__main__':
-    print("\nHILL CLIMBING")
-
-    if len(sys.argv) > 1:
-        start_time = time.time()
-        run(sys.argv[1])
-        print(sys.argv[1] + " \t\t\ttime {:.6f}s with score {}".
-              format(time.time() - start_time, group(global_score)))
-
-    else:
-        # save start time in S for later
-        start_time = time.time()
-        S = start_time
-
-        run("a_example")
-        print("a_example \t\t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score)))
-
-        start_time = time.time()
-        last_global_score = global_score
-        run("b_should_be_easy")
-        print("b_should_be_easy \ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
-
-        start_time = time.time()
-        last_global_score = global_score
-        run("c_no_hurry")
-        print("c_no_hurry \t\t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
-
-        start_time = time.time()
-        last_global_score = global_score
-        run("d_metropolis")
-        print("d_metropolis \t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
-
-        start_time = time.time()
-        last_global_score = global_score
-        run("e_high_bonus")
-        print("e_high_bonus \t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
-
-        print("Global score is {}".format(group(global_score)))
-        print("Total runtime is {:.4f}s".format(time.time() - S))
