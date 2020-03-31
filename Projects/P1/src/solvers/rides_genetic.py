@@ -2,32 +2,31 @@ import sys
 import random
 import time
 
-from src.files import parse_input, dump_rides
+from src.files import parse_input, dump_rides, group
 from src.objects.CarGeneticRides import CarGeneticRides
 from src.objects.Rides import Rides
 from src.objects.FIFO import FIFO
 
-# Finished a_example: time 0.37897777557373047 with score 10
-# Finished b_should_be_easy: time 48.94636273384094 with score 172588
-# 3rd file takes s -
-# 4th file takes s -
-# 5th file takes s -
-# all combined take s -
-
-# final score
+# a_example           TIME 0.1981s                     SCORE 10
+# b_should_be_easy    TIME 18.9263s                    SCORE 172,159
+# c_no_hurry          TIME 1585.7304s (+- 26.43 min)   SCORE 6,826,488
+# d_metropolis        TIME 559.4747s   (+- 9.33 min)   SCORE 4,352,611
+# e_high_bonus        TIME 377.7967s   (+- 6.30 min)   SCORE 15,995,783
+# global score is     27,347,051
+# total runtime is    2542.1263s (+- 42.4 min)
 
 global_score = 0
 
 # constants
 POPULATION_SIZE = 2000
-POOLING_SIZE = 800
+POOLING_SIZE = 0.4 * POPULATION_SIZE
 CONSTANT_GENERATION_NUMBER = 6
 MUTATION_RATE = 0.01
 
 
 def run(filename):
     global global_score
-    file = "../assets/input/" + filename
+    file = "../../assets/input/" + filename
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     CarGeneticRides.BONUS = bonus
     Rides.N_RIDES = len(rides)
@@ -72,33 +71,50 @@ def run(filename):
 
 
 if __name__ == '__main__':
+    print("\nGENETIC (RIDES)")
+    print("Population size:", POPULATION_SIZE)
+    print("Pooling size:", POOLING_SIZE)
+    print("Mutation rate:", MUTATION_RATE)
+    print("Generation number:", CONSTANT_GENERATION_NUMBER, "\n")
+
     if len(sys.argv) > 1:
+        start_time = time.time()
         run(sys.argv[1])
+        print(sys.argv[1] + " \t\t\ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score)))
 
     else:
+        # save start time in S for later
         start_time = time.time()
+        S = start_time
+
         run("a_example")
-        print("Finished a_example: \t\ttime", time.time() - start_time, "with score", global_score)
+        print("a_example \t\t\ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score)))
 
         start_time = time.time()
         last_global_score = global_score
         run("b_should_be_easy")
-        print("Finished b_should_be_easy: \ttime", time.time() - start_time, "with score",
-              global_score - last_global_score)
+        print("b_should_be_easy \ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score - last_global_score)))
 
         start_time = time.time()
         last_global_score = global_score
         run("c_no_hurry")
-        print("Finished c_no_hurry: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
+        print("c_no_hurry \t\t\ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score - last_global_score)))
 
         start_time = time.time()
         last_global_score = global_score
         run("d_metropolis")
-        print("Finished d_metropolis: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
+        print("d_metropolis \t\ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score - last_global_score)))
 
         start_time = time.time()
         last_global_score = global_score
         run("e_high_bonus")
-        print("Finished e_high_bonus: \t\ttime", time.time() - start_time, "with score", global_score - last_global_score)
+        print("e_high_bonus \t\ttime {:.4f}s with score {}".
+              format(time.time() - start_time, group(global_score - last_global_score)))
 
-        print("\nGlobal score is {}".format(global_score))
+        print("Global score is {}".format(group(global_score)))
+        print("Total runtime is {:.4f}s".format(time.time() - S))

@@ -1,6 +1,6 @@
 # general
 .idea
-IART.iml
+*.iml
 
 # other
 Book.pdf
