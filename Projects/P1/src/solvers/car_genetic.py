@@ -3,6 +3,12 @@ from .files import parse_input, dump_rides
 from .objects.Car import Car
 from .objects.FIFO import FIFO
 
+# constants
+POPULATION_SIZE = 100
+POOLING_SIZE = 0.4 * POPULATION_SIZE
+CONSTANT_GENERATION_NUMBER = 6
+MUTATION_RATE = 0.01
+
 # trial run
 # population = 500 | pooling_size = 200 | generations = 6 | mutation rate = 0.01
 # a_example            time 000.0215s	score 10
@@ -15,12 +21,6 @@ from .objects.FIFO import FIFO
 
 # final score
 global_score = 0
-
-# constants
-POPULATION_SIZE = 500
-POOLING_SIZE = 0.4 * POPULATION_SIZE
-CONSTANT_GENERATION_NUMBER = 6
-MUTATION_RATE = 0.01
 
 
 def print_car_genetic_info():
@@ -48,7 +48,6 @@ def car_genetic(file):
 
         fitness_pile = FIFO(CONSTANT_GENERATION_NUMBER)
         fitness_pile.put(max_fitness_car.fitness)
-
         # print("Car " + str(i+1) + " -- generation " + str(generation)
         #       + " -- max fitness ("+str(max_fitness_car.fitness)+")")
 
