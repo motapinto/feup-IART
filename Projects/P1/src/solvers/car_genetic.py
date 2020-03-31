@@ -22,9 +22,7 @@ CONSTANT_GENERATION_NUMBER = 5
 MUTATION_RATE = 0.01
 
 
-def car_genetic(filename):
-    global global_score
-    file = "../assets/input/" + filename
+def car_genetic(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     Car.BONUS = bonus
     Car.RIDES = rides
@@ -86,4 +84,4 @@ def car_genetic(filename):
         for ride in car.rides:
             score += ride.score
 
-    global_score += score
+    return score

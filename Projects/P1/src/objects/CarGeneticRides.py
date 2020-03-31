@@ -1,8 +1,6 @@
 from src.objects.Position import Position
 from src.objects.Ride import Ride
 
-import random
-
 
 class CarGeneticRides(object):
     BONUS = 0
@@ -12,6 +10,7 @@ class CarGeneticRides(object):
         self.position = Position(0, 0)
         self.current_t = 0
         self.rides = []
+        self.fitness = 0
 
     def sort_rides(self):
         self.rides.sort(key=lambda ride: ride.earliest + ride.distance)
@@ -19,7 +18,7 @@ class CarGeneticRides(object):
     def calculate_fitness(self):
         self.position = Position(0, 0)
         self.current_t = 0
-        fitness = 0
+        self.fitness = 0
         self.sort_rides()
 
         for ride in self.rides:
@@ -31,18 +30,18 @@ class CarGeneticRides(object):
 
             # for every ride that starts precisely on time you will earn and additional bonus
             if time == ride.earliest:
-                fitness += int(self.BONUS)
+                self.fitness += int(self.BONUS)
 
             # updates the time after completing the ride
             self.current_t = time + ride.distance
 
             # for every ride that finishes on time you will earn points proportional to the distance of that ride
             if self.current_t <= ride.latest:
-                fitness += ride.distance
+                self.fitness += ride.distance
 
             self.position = ride.destination_position
 
-        return fitness
+        return self.fitness
 
     def add_ride(self, ride: Ride):
         self.rides.append(ride)

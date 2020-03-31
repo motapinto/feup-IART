@@ -1,20 +1,16 @@
-import sys
 from src.files import parse_input, dump_rides
 from src.objects.CarGeneticRides import CarGeneticRides
 
-# 1st file instant - 10
-# 2nd file instant - 176877
-# 3rd file takes 00:04:30 -
-# 4th file takes 00:04:46 -
-# 5th file takes 00:04:35 -
-# all combined take 00:13:51 -
+# a_example 			time 0.0010s with score 10
+# b_should_be_easy 	    time 0.2992s with score 176,877
+# c_no_hurry 			time 163.2715s with score 7,564,919
+# d_metropolis 		    time 174.3971s with score 4,689,009
+# e_high_bonus 		    time 179.0661s with score 21,465,945
+# Global score is  33,896,760
+# Total runtime is 517.0349s
 
-global_score = 0
 
-
-def greedy(filename):
-    global global_score
-    file = "../assets/input/" + filename
+def greedy(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     cars = [CarGeneticRides(i + 1) for i in range(n_vehicles)]
     CarGeneticRides.BONUS = bonus
@@ -25,20 +21,19 @@ def greedy(filename):
         # chooses the ride that gives the highest score
         chosen_ride = max(rides, key=lambda ride_in_rides: score_ride(chosen_car, ride_in_rides, bonus))
         chosen_car.add_ride(chosen_ride)
-        rides.remove(chosen_ride)
         chosen_car.calculate_fitness()
+        rides.remove(chosen_ride)
 
     dump_rides(file + ".out", cars)
 
     score = 0
     for car in cars:
-        for ride in car.rides:
-            score += ride.score
+        score += car.fitness
 
-    global_score += score
-    print("Score for file {} --> {}".format(filename, score))
+    return score
 
 
+# Evaluation function
 def score_ride(car_to_score, ride_to_score, bonus_to_score):
     drive_distance = ride_to_score.start_position.distance(ride_to_score.destination_position)
     pick_distance = car_to_score.position.distance(ride_to_score.start_position)

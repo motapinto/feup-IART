@@ -11,12 +11,8 @@ from src.objects.CarGeneticRides import CarGeneticRides
 # global score is     26,771,955
 # total runtime is    6.9004s
 
-global_score = 0
 
-
-def simulated_annealing(filename):
-    global global_score
-    file = "../assets/input/" + filename
+def simulated_annealing(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
 
     CarGeneticRides.BONUS = bonus
@@ -34,4 +30,4 @@ def simulated_annealing(filename):
         temperature = random.uniform(0.8, 0.99) * temperature
 
     dump_rides(file + ".out", solution.cars)
-    global_score += solution.fitness
+    return solution.fitness

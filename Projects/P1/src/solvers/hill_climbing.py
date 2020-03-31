@@ -10,14 +10,9 @@ from src.objects.CarGeneticRides import CarGeneticRides
 # global score is     26,765,192
 # total runtime is    1950.5438s (+- 32.5 min)
 
-global_score = 0
 
-
-def hill_climbing(filename):
-    global global_score
-    file = "../assets/input/" + filename
+def hill_climbing(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
-
     CarGeneticRides.BONUS = bonus
     Rides.N_RIDES = len(rides)
     Rides.N_CARS = n_vehicles
@@ -31,5 +26,4 @@ def hill_climbing(filename):
         solution = solution.hill_climbing_random()
 
     dump_rides(file + ".out", solution.cars)
-    global_score += solution.fitness
-
+    return solution.fitness

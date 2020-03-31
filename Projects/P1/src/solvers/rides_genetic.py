@@ -12,8 +12,6 @@ from src.objects.FIFO import FIFO
 # global score is     27,347,051
 # total runtime is    2542.1263s (+- 42.4 min)
 
-global_score = 0
-
 # constants
 POPULATION_SIZE = 2000
 POOLING_SIZE = 0.4 * POPULATION_SIZE
@@ -21,9 +19,7 @@ CONSTANT_GENERATION_NUMBER = 6
 MUTATION_RATE = 0.01
 
 
-def rides_genetic(filename):
-    global global_score
-    file = "../assets/input/" + filename
+def rides_genetic(file):
     rides, rows, cols, n_vehicles, bonus, t = parse_input(file + ".in")
     CarGeneticRides.BONUS = bonus
     Rides.N_RIDES = len(rides)
@@ -64,4 +60,4 @@ def rides_genetic(filename):
 
     dump_rides(file + ".out", max_fitness_rides.cars)
 
-    global_score += max_fitness_rides.fitness
+    return max_fitness_rides.fitness

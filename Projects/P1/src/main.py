@@ -8,56 +8,46 @@ from src.solvers.greedy import greedy
 import sys
 import time
 
-# final score
-global_score = 0
-
 
 def run(algorithm):
+    global_score = 0
+
     if len(sys.argv) == 3:
         start_time = time.time()
-        algorithm(sys.argv[2])
-        print(sys.argv[2] + " \t\t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score)))
+        score = algorithm("../assets/input/" + sys.argv[2])
+        print(sys.argv[2] + " \t\ttime {:.4f}s \t\tscore {}".
+              format(time.time() - start_time, group(score)))
 
     else:
-        # save start time in S for later
+        # save start time in start to count total time
         start_time = time.time()
         start = start_time
-
-        algorithm("a_example")
-        print("a_example \t\t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score)))
-
-        start_time = time.time()
-        last_global_score = global_score
-
-        algorithm("b_should_be_easy")
-        print("b_should_be_easy \ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
+        score = algorithm("../assets/input/a_example")
+        global_score += score
+        print("a_example \t\t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
-        last_global_score = global_score
-
-        algorithm("c_no_hurry")
-        print("c_no_hurry \t\t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
+        score = algorithm("../assets/input/b_should_be_easy")
+        global_score += score
+        print("b_should_be_easy \ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
-        last_global_score = global_score
-
-        algorithm("d_metropolis")
-        print("d_metropolis \t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
+        score = algorithm("../assets/input/c_no_hurry")
+        global_score += score
+        print("c_no_hurry \t\t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
-        last_global_score = global_score
+        score = algorithm("../assets/input/d_metropolis")
+        global_score += score
+        print("d_metropolis \t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
 
-        algorithm("e_high_bonus")
-        print("e_high_bonus \t\ttime {:.4f}s with score {}".
-              format(time.time() - start_time, group(global_score - last_global_score)))
+        start_time = time.time()
+        score = algorithm("../assets/input/e_high_bonus")
+        global_score += score
+        print("e_high_bonus \t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
 
-        print("Global score is {}".format(group(global_score)))
-        print("Total runtime is {:.4f}s".format(time.time() - start))
+        print("Global score is \t{}".format(group(global_score)))
+        print("Total runtime is \t{:.4f}s".format(time.time() - start))
 
 
 if __name__ == '__main__':
@@ -65,7 +55,7 @@ if __name__ == '__main__':
         print("python main.py <algorithm> <specific file>\t -> For a specific file")
         print("python main.py <algorithm>\t\t\t\t\t -> For all test files\n")
         print("algorithm options : car_genetic | greedy | hill_climbing  | rides_genetic | simulated_annealing")
-        print("file options : a_example.in | b_should_be_easy.in | c_no_hurry.in | d_metropolis.in | e_high_bonus.in\n")
+        print("file options      : a_example | b_should_be_easy | c_no_hurry | d_metropolis | e_high_bonus\n")
         print("Try again...")
         exit(1)
 
