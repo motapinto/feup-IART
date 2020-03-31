@@ -20,3 +20,13 @@ def dump_rides(file, cars):
             for r in c.rides:
                 f.write('{} '.format(r.number))
             f.write('\n')
+
+
+# example (1000000 is turned into 1,000,000)
+def group(number):
+    s = '%d' % number
+    groups = []
+    while s and s[-1].isdigit():
+        groups.append(s[-3:])
+        s = s[:-3]
+    return s + ','.join(reversed(groups))
