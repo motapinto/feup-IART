@@ -1,5 +1,5 @@
-from src.files import parse_input, dump_rides
-from src.objects.CarGeneticRides import CarGeneticRides
+from .files import parse_input, dump_rides
+from .objects.CarGeneticRides import CarGeneticRides
 
 # a_example 			time 0.0010s with score 10
 # b_should_be_easy 	    time 0.2992s with score 176,877

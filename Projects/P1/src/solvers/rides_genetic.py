@@ -1,8 +1,8 @@
 import random
-from src.files import parse_input, dump_rides, group
-from src.objects.CarGeneticRides import CarGeneticRides
-from src.objects.Rides import Rides
-from src.objects.FIFO import FIFO
+from .files import parse_input, dump_rides
+from .objects.CarGeneticRides import CarGeneticRides
+from .objects.Rides import Rides
+from .objects.FIFO import FIFO
 
 # a_example           TIME 0.1981s                     SCORE 10
 # b_should_be_easy    TIME 18.9263s                    SCORE 172,159

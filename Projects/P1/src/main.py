@@ -1,9 +1,9 @@
-from src.files import group
-from src.solvers.car_genetic import car_genetic
-from src.solvers.hill_climbing import hill_climbing
-from src.solvers.rides_genetic import rides_genetic
-from src.solvers.simulated_annealing import simulated_annealing
-from src.solvers.greedy import greedy
+from solvers.car_genetic import car_genetic
+from solvers.hill_climbing import hill_climbing
+from solvers.rides_genetic import rides_genetic
+from solvers.simulated_annealing import simulated_annealing
+from solvers.greedy import greedy
+from solvers.files import group
 
 import sys
 import time
@@ -15,6 +15,7 @@ def run(algorithm):
     if len(sys.argv) == 3:
         start_time = time.time()
         score = algorithm("../assets/input/" + sys.argv[2])
+
         print(sys.argv[2] + " \t\ttime {:.4f}s \t\tscore {}".
               format(time.time() - start_time, group(score)))
 
@@ -24,27 +25,27 @@ def run(algorithm):
         start = start_time
         score = algorithm("../assets/input/a_example")
         global_score += score
-        print("a_example \t\t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
+        print("a_example \t\t\t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
         score = algorithm("../assets/input/b_should_be_easy")
         global_score += score
-        print("b_should_be_easy \ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
+        print("b_should_be_easy \t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
         score = algorithm("../assets/input/c_no_hurry")
         global_score += score
-        print("c_no_hurry \t\t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
+        print("c_no_hurry \t\t\t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
         score = algorithm("../assets/input/d_metropolis")
         global_score += score
-        print("d_metropolis \t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
+        print("d_metropolis \t\t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
         score = algorithm("../assets/input/e_high_bonus")
         global_score += score
-        print("e_high_bonus \t\ttime {:.4f}s \t\tscore {}".format(time.time() - start_time, group(score)))
+        print("e_high_bonus \t\t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         print("Global score is \t{}".format(group(global_score)))
         print("Total runtime is \t{:.4f}s".format(time.time() - start))

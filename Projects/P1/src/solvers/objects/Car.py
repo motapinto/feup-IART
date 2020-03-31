@@ -1,5 +1,5 @@
-from src.objects.Position import Position
-from src.objects.Ride import Ride
+from .Position import Position
+from .Ride import Ride
 
 import random
 

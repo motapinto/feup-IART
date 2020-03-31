@@ -1,7 +1,7 @@
 import random
 import math
 
-from src.objects.CarGeneticRides import CarGeneticRides
+from .CarGeneticRides import CarGeneticRides
 
 
 class Rides(object):

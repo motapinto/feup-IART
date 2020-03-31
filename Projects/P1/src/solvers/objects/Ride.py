@@ -1,4 +1,4 @@
-from src.objects.Position import Position
+from .Position import Position
 
 
 class Ride(object):

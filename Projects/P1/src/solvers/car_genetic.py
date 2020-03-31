@@ -1,7 +1,7 @@
 import random
-from src.files import parse_input, dump_rides, group
-from src.objects.Car import Car
-from src.objects.FIFO import FIFO
+from .files import parse_input, dump_rides, group
+from .objects.Car import Car
+from .objects.FIFO import FIFO
 
 # a_example           TIME 0.1681s                      SCORE 10
 # b_should_be_easy    TIME 59.7397s    (+- 1.0 min)     SCORE 176,877
