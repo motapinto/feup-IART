@@ -11,6 +11,8 @@ import time
 
 def run(algorithm):
     global_score = 0
+    # print algorithm name
+    print("\n{}".format(algorithm.__name__.upper()))
 
     if len(sys.argv) == 3:
         start_time = time.time()
