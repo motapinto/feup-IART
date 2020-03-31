@@ -25,6 +25,7 @@ def run(algorithm):
         start = start_time
         score = algorithm("../assets/input/a_example")
         global_score += score
+
         print("a_example \t\t\t\ttime {:.4f}s \t\t\tscore {}".format(time.time() - start_time, group(score)))
 
         start_time = time.time()
