@@ -9,6 +9,11 @@
 > ([Luís Ramos](https://github.com/luispramos))\
 > ([Francisco Gonçalves ](https://github.com/kiko-g))
 >
+> **Project 1: Optimization - Hill Climbing | Simulated Annealing | Genetic**
+>
+> https://github.com/motapinto/google-hashcode-2018
+>
+>
 > **Any problems?**\
 > Start an Issue please.
 
