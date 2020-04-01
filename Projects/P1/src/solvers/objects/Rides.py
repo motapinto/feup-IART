@@ -77,3 +77,4 @@ class Rides(object):
                 return
 
             self.fitness = fitness
+            ride.car = swap
