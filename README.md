@@ -3,7 +3,7 @@
 > **2019/2020** - 3rd Year, 2st Semester
 >
 > **Course:** Inteligência Artificial: IART page in sigarra: [LBAW page in sigarra](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=272742) | Artificial Intelligence
-
+>
 > **Projects developed by:**\
 > ([Martim Silva](https://github.com/motapinto))\
 > ([Luís Ramos](https://github.com/luispramos))\
