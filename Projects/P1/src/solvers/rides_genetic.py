@@ -5,7 +5,7 @@ from .objects.Rides import Rides
 from .objects.FIFO import FIFO
 
 # constants
-POPULATION_SIZE = 100
+POPULATION_SIZE = 40
 POOLING_SIZE = 0.4 * POPULATION_SIZE
 CONSTANT_GENERATION_NUMBER = 6
 MUTATION_RATE = 0.01
