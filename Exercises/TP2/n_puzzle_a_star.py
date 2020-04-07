@@ -1,6 +1,6 @@
 import time
 
-from Exercises.TP2.classes.Board import Board
+from classes.Board import Board
 
 
 if __name__ == '__main__':
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     start = time.time()
 
     # while not state == Board([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0], 4):
-    while not state == Board([1, 2, 3, 4, 5, 6, 7, 8, 0], 3):
+    while state.board != state.goal:
         state = potential_states.pop(0)
 
         if state in visited_states:
@@ -42,6 +42,7 @@ if __name__ == '__main__':
                     break
             if not inserted:
                 potential_states.append(new_state)
+
         if state.empty_space() % state.size < state.size - 1:
             new_state = state.move("LEFT")
             inserted = False
@@ -74,6 +75,6 @@ if __name__ == '__main__':
     while len(output) > 0:
         state = output.pop()
         # size = 0
-        print("Board: ", state.board)
+        state.print_puzzle()
 
-    print(time.time() - start)
+    print("total time: " + str(time.time() - start) + "s")
