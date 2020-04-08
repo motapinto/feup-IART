@@ -1,4 +1,5 @@
 import math
+from itertools import combinations, permutations, product
 import numpy as np
 import random
 
@@ -44,7 +45,14 @@ class Schedule(object):
 
             processed.append(val)
 
-        return num_incompatibilities
+        return -num_incompatibilities
+
+    def get_best(self):
+        array = list(range(1, self.slots + 1))
+        ll = [p for p in product(array, repeat=9)]
+        solution = min(ll, key=lambda l: self.evaluation_solution(l))
+        print(solution)
+        print(self.evaluation_solution(solution))
 
     def hill_climbing_random(self):
         value = random.randint(1, self.slots)
@@ -64,12 +72,13 @@ class Schedule(object):
         temperature = len(self.initial_solution)
 
         while temperature >= 1:
-
-            # random successor (alterantive is to do: foreach success)
-            value = random.randint(1, self.slots)
-            index = random.randint(0, len(self.initial_solution) - 1)
-            new_sol = self.initial_solution.copy()
-            new_sol[index] = value
+            # random successor (alternative is to do: foreach successor)
+            # value = random.randint(1, self.slots)
+            # index = random.randint(0, len(self.initial_solution) - 1)
+            # new_sol = self.initial_solution.copy()
+            # new_sol[index] = value
+            neighbours = self.get_neighbours()
+            new_sol = random.choice(neighbours)
 
             if self.evaluation_solution(new_sol) > self.evaluation_solution(self.initial_solution):
                 self.initial_solution = new_sol
@@ -89,6 +98,24 @@ class Schedule(object):
 
         print(self.initial_solution)
         return self.evaluation_solution(self.initial_solution)
+
+    # neighbourhood is considered as follows:
+    #   for each value on self.initial_solution increments n and decreases n n(1-4)
+    #   creating a neighbourhood of 8 elements
+    def get_neighbours(self):
+        neighbours = []
+
+        for j in range(self.slots):
+            neighbour1 = []
+            neighbour2 = []
+            for i in range(len(self.initial_solution)):
+                neighbour1.append(self.initial_solution[i] % self.slots + j)
+                neighbour2.append((self.initial_solution[i] - (1 + j)) % self.slots + j)
+
+            neighbours.append(neighbour1)
+            neighbours.append(neighbour2)
+
+        return neighbours
 
 
 if __name__ == '__main__':
@@ -112,6 +139,6 @@ if __name__ == '__main__':
     schedule = Schedule(classes, slots, initial_sol)
 
     # print(schedule.schedules[0].calculate_incompatibilities(schedule.schedules[6]))
-    # print(schedule.evaluation_solution(schedule.initial_solution))
+    # print(abs(schedule.evaluation_solution(schedule.initial_solution)))
     # print(schedule.hill_climbing_random())
-    print(schedule.simulated_annealing())
+    print("num_incompatibilities: " + str(abs(schedule.simulated_annealing())))
