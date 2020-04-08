@@ -3,6 +3,7 @@ from itertools import combinations, permutations, product
 import numpy as np
 import random
 
+
 class Class(object):
     def __init__(self, id, students_assigned):
         self.id = id
@@ -47,25 +48,27 @@ class Schedule(object):
 
         return -num_incompatibilities
 
-    def get_best(self):
+    # takes a while...
+    def get_best_sol(self):
         array = list(range(1, self.slots + 1))
         ll = [p for p in product(array, repeat=9)]
-        solution = min(ll, key=lambda l: self.evaluation_solution(l))
+        solution = max(ll, key=lambda l: self.evaluation_solution(l))
+        print("best solution: ", end="")
         print(solution)
-        print(self.evaluation_solution(solution))
+        print("num incompatibilities: " + str(self.evaluation_solution(solution)))
 
+    # gets stuck on local maximums
     def hill_climbing_random(self):
-        value = random.randint(1, self.slots)
-        index = random.randint(0, len(self.initial_solution))
-
         while True:
-            new_sol = self.initial_solution.copy()
-            new_sol[index] = value
+            neighbours = self.get_neighbours()
+            new_sol = random.choice(neighbours)
             if self.evaluation_solution(new_sol) > self.evaluation_solution(self.initial_solution):
                 self.initial_solution = new_sol
             else:
                 break
-        return new_sol
+
+        print(self.initial_solution)
+        return self.evaluation_solution(self.initial_solution)
 
     def simulated_annealing(self):
         # if we start with a high temperature high the probability below will be almost one
@@ -134,11 +137,20 @@ if __name__ == '__main__':
     classes.append(Class(12, [9, 10, 11, 12]))
 
     slots = 4
-    initial_sol = [4, 1, 2, 3, 2, 4, 1, 1, 2, 1, 2, 3]
+    # initial_sol = [4, 1, 2, 3, 2, 4, 1, 1, 2, 1, 2, 3]
+    initial_sol = []
+    for i in range(12):
+        initial_sol.append(random.randint(1, slots))
 
     schedule = Schedule(classes, slots, initial_sol)
 
+
+
+
     # print(schedule.schedules[0].calculate_incompatibilities(schedule.schedules[6]))
     # print(abs(schedule.evaluation_solution(schedule.initial_solution)))
-    # print(schedule.hill_climbing_random())
-    print("num_incompatibilities: " + str(abs(schedule.simulated_annealing())))
+    print("hill climbing:")
+    print("num_incompatibilities: " + str(abs(schedule.hill_climbing_random()))) # hill climbing
+    print("\nsimulated annealing:")
+    print("num_incompatibilities: " + str(abs(schedule.simulated_annealing()))) # simulted annealing
+    # schedule.get_best_sol() # gets best solution
