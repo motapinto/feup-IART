@@ -1,10 +1,11 @@
 # general
-.idea
+**/.idea
 *.iml
 gits
 
 # other
-Book.pdf
 __pycache__/
 *.pyc
 *.out
+
+#nesting
