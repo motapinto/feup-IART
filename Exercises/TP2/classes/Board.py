@@ -3,9 +3,14 @@ from board import Board
 
 class Board(object):
     def __init__(self, board, size, parent=None):
-        self.size = size
         self.board = board
+        self.size = size
         self.parent = parent
+        self.num_pieces = pow(self.size, 2)
+
+        goal = list(range(1, self.num_pieces))
+        goal.append(0)
+        self.goal = goal
 
         h1 = 0
         h2 = self.depth()
@@ -55,6 +60,13 @@ class Board(object):
             depth += 1
 
         return depth
+
+    def print_puzzle(self):
+        for (index, value) in enumerate(self.board):
+            print(' %s ' % value, end=' ')
+            if index in [x for x in range(self.size - 1, self.num_pieces, self.size)]:
+                print()
+        print()
 
     def __eq__(self, o: Board) -> bool:
         if o is None:

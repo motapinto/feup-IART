@@ -2,10 +2,17 @@
 
 > **2019/2020** - 3rd Year, 2st Semester
 >
-> **Course:** Inteligência Artificial: [IART page in sigarra](https://sigarra.up.pt/feup/en/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=436449) | Artificial Intelligence
+> **Course:** Inteligência Artificial: IART page in sigarra: [LBAW page in sigarra](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=272742) | Artificial Intelligence
 >
-> **Project developed by:**\
-> Martim Silva ([motapinto](https://github.com/motapinto))
+> **Projects developed by:**\
+> ([Martim Silva](https://github.com/motapinto))\
+> ([Luís Ramos](https://github.com/luispramos))\
+> ([Francisco Gonçalves ](https://github.com/kiko-g))
+>
+> **Project 1: Optimization - Hill Climbing | Simulated Annealing | Genetic**
+>
+> https://github.com/motapinto/google-hashcode-2018
+>
 >
 > **Any problems?**\
 > Start an Issue please.
