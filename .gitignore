@@ -7,5 +7,3 @@ gits
 __pycache__/
 *.pyc
 *.out
-
-#nesting
