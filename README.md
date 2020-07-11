@@ -1,9 +1,9 @@
-# IART 2019-2020
+# IART
 
 **2019/2020** - 3rd Year, 2nd Semester\
 **Course:** [Inteligência Artificial](https://sigarra.up.pt/feup/pt/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=436449) | [*Artificial Intelligence*](https://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=436449)
 
-**Developpers and owners:**
+**Projects developed by:**
 - [Martim Silva](https://github.com/motapinto)
 - [Luís Ramos](https://github.com/luispramos)
 - [Francisco Gonçalves ](https://github.com/kiko-g)
